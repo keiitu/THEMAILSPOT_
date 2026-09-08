@@ -1,0 +1,13 @@
+#Netbeans auto generated files
+nbproject/private
+build/
+dist/
+*.class
+
+#Operating system files
+.DS Store
+thumbs.db
+
+#Logs and temporary files
+*.log
+*.tmp
