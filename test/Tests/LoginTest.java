@@ -55,5 +55,11 @@ public class LoginTest {
     assertTrue("Cellphone should be correctly formatted", result);
    }
    
+   @Test
+   public void testUsernameInvalid(){
+       Login usernameTest = new Login();
+       boolean result = usernameTest.checkUserName("kyle!!!!!!!");//Assigns result from checking the validity of the username to the boolean variable "result"
+       assertFalse("Username should be incorrectly formatted", result);
+   }
     
 }
