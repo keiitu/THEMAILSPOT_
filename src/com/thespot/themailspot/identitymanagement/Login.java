@@ -12,8 +12,8 @@ package com.thespot.themailspot.identitymanagement;
  * POE: Part 01 of 03 (Registration and Login Features)
  */
 
-//This program will create an account by entering a username, password, and South African cellphone number
-//Main class: The blueprint for instances. It defines the data, and information about the class itself, as well as the objects that will be instantiated.
+//This program will validate the username, password, and South African cellphone number that is entered by the user
+//Login class: The blueprint for instances. It defines the data, and information about the class itself, as well as the objects that will be instantiated.
 public class Login {
     
     //Variables for the validated values recieved from the user
