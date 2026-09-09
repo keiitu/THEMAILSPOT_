@@ -26,15 +26,21 @@ public class LoginTest {
   
     
     //assertEquals tests
-    //Testing if the checkUsername method works as expected
     
     
-   @Test
+    
+    /**
+     * AssertTrue/False Tests
+     * Tests if all the methods within the Login Class(Responsible for data validation) work as expected)
+            **/
+    @Test
    public void testUserNameValid(){
     Login usernameTest = new Login();
     boolean result = usernameTest.checkUserName("kyl_1");
     assertTrue("Username should be valid", result);
        
    }
+   
+   
     
 }
