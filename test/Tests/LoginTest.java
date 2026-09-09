@@ -37,8 +37,15 @@ public class LoginTest {
    public void testUserNameValid(){
     Login usernameTest = new Login();
     boolean result = usernameTest.checkUserName("kyl_1");
-    assertTrue("Username should be valid", result);
+    assertTrue("Username should be correctly formatted", result);
        
+   }
+   
+   @Test
+   public void testPasswordValid(){
+       Login passwordTest = new Login();
+       boolean result = passwordTest.checkPasswordComplexity("Ch&&sec@ke99!");
+       assertTrue("Password should meet complexity requirements", result);
    }
    
    
