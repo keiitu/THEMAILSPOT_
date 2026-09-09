@@ -36,7 +36,7 @@ public class LoginTest {
     @Test
    public void testUserNameValid(){
     Login usernameTest = new Login();
-    boolean result = usernameTest.checkUserName("kyl_1");
+    boolean result = usernameTest.checkUserName("kyl_1");//Assigns result from checking the validity of the username to the boolean variable "result"
     assertTrue("Username should be correctly formatted", result);
        
    }
@@ -44,10 +44,16 @@ public class LoginTest {
    @Test
    public void testPasswordValid(){
        Login passwordTest = new Login();
-       boolean result = passwordTest.checkPasswordComplexity("Ch&&sec@ke99!");
+       boolean result = passwordTest.checkPasswordComplexity("Ch&&sec@ke99!");//Assigns result from checking the validity of the password to the boolean variable "result"
        assertTrue("Password should meet complexity requirements", result);
    }
    
+   @Test
+   public void testCellphoneValid(){
+    Login cellphoneTest = new Login();
+    boolean result = cellphoneTest.checkCellPhoneNumber("+27838968976");//Assigns result from checking the validity of the cellphone to the boolean variable "result"
+    assertTrue("Cellphone should be correctly formatted", result);
+   }
    
     
 }
