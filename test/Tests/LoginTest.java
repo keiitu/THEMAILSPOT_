@@ -55,11 +55,21 @@ public class LoginTest {
     assertTrue("Cellphone should be correctly formatted", result);
    }
    
+   //AssertFalse tests
    @Test
    public void testUsernameInvalid(){
        Login usernameTest = new Login();
        boolean result = usernameTest.checkUserName("kyle!!!!!!!");//Assigns result from checking the validity of the username to the boolean variable "result"
        assertFalse("Username should be incorrectly formatted", result);
    }
+   
+   @Test
+   public void testPasswordInvalid(){
+       Login passwordTest = new Login();
+       boolean result = passwordTest.checkPasswordComplexity("password");//Assigns result from checking the validity of the password to the boolean variable "result"
+       assertFalse("Password should not meet complexity requirements", result);
+   }
+   
+   
     
 }
