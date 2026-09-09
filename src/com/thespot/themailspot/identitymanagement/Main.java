@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Keitumetse Chief Mamakoko: Student @Rosebank International - Student No: 10496139
+ * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
  * 
  * POE: Part 01 of 03 (Registration and Login Features)
  */
