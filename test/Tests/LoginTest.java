@@ -70,6 +70,13 @@ public class LoginTest {
        assertFalse("Password should not meet complexity requirements", result);
    }
    
+   @Test
+   public void testCellphoneInvalid(){
+       Login cellphoneTest = new Login();
+       boolean result = cellphoneTest.checkCellPhoneNumber("08966553");//Assigns result from checking the validity of the cellphone to the boolean variable "result"
+       assertFalse("Cellphone should be incorrectly formatted", result);
+   }
+   
    
     
 }
