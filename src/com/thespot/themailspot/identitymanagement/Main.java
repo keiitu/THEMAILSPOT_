@@ -219,7 +219,7 @@ public class Main {
             
             
             }else{
-                    System.out.println("Username or password incorrectly formatted, please try again");
+                    System.out.println(registrationData.returnLoginStatus(false));
                     }
         }
         
