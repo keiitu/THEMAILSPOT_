@@ -122,7 +122,7 @@ public class Login {
             public String returnLoginStatus(boolean isSuccessful){
                 //if statement to relay that if the login was successful, then the welcome message should be shown to the user.
                 if (isSuccessful){
-                    return "Welcome "+ storedFirstname + ", " + storedLastname + " It is great to see you again.";
+                    return "Welcome "+ storedFirstname + ", " + storedLastname + " it is great to see you again.";
                 }else{
                     return "Username or password incorrect. Please try again";  
                 }
