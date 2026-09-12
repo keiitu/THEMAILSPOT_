@@ -78,19 +78,54 @@ public class Login {
                 
             }
             
+       //Helper methods for returning the necessary registration/login flow messaging to the user
+            public String getReturnUsernameValid(String username){
+                //If statement to relay conditions of the successful username capture
+                if (checkUserName(username)){
+                    return "Username has been captured successfully";
+                    
+                }else{
+                    return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length";
+                }
+                
+            }
+            
+       //Helper methods for returning the necessary password validity messaging to the user
+            public String getReturnPasswordValid (String password){
+             //If statement to relay conditions of the successful password capture
+             if(checkPasswordComplexity(password)){
+                 return "Password has been successfully captured";
+             }else{
+                 return "Password is not correctly formatted; please ensure that your password contains at least eight characters, a capital letter, a number, and a special character.";
+             }
+                
+            }
+            
+       //Helper method for ensuring the necessary cellphone validity messaging to the user
+            public String getReturnCellphoneValid (String cellphone){
+                //If statement to relay the conditions of the successful cellphone capture
+                if (checkCellPhoneNumber (cellphone)){
+                    return "Cellphone number successfully captured";
+                }else{
+                    return "Cellphone number is incorrectly formatted or does not contain an international country code; Please correct the number and try again";
+                }
+            }
+            
+            
+            
        //Registration method; This method calls the validation methods, stores data and returns the necessary messaging to the user
             public String registerUser(String firstname, String lastname, String username, String password, String cellphone){
                 //if statements to validate the username, password, and the cellphone number. Each will return a message depending on the argument it recieves
                 if(!checkUserName(username)){
-                    return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length";
+                    return getReturnUsernameValid(username);
                 }
               
                   if(!checkPasswordComplexity(password)){
-                    return "Password is not correctly formatted; please ensure that your password contains at least eight characters, a capital letter, a number, and a special character.";
+                    return getReturnPasswordValid(password);
                 }
                 
                 if (!checkCellPhoneNumber (cellphone)){
-                    return "Cellphone number is incorrectly formatted or does not contain an international country code; Please correct the number and try again";
+                    return getReturnCellphoneValid(cellphone);
                 }
                 
                 //Storing the data in the declared fields should they pass all validation trials
