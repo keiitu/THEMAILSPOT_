@@ -25,9 +25,50 @@ public class LoginTest {
    
   
     
-    //assertEquals tests
-    
-    
+   /**
+     * AssertEquals Tests
+     * Tests if all the methods within the Login Class(Responsible for data validation) work as expected.
+     * This specific test checks if the expected message "You have been registered successfully matches the 
+     *
+     **/
+//    @Test//Tests if 
+//    public void testSuccessfulRegistrationMessage(){
+//     Login registrationSuccess = new Login();
+//     String expected = "Welcome Kyle, Kevins.You have been registered successfully.";
+//     String actual = registrationSuccess.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+//     assertEquals(expected, actual);
+//    }
+    @Test
+    public void testInvalidUsernameMessage(){
+        Login usernameTest = new Login();
+        String expected = "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length";
+        String actual = usernameTest.registerUser("Kyle", "Kevins", "kyle!!!!!!!", "Ch&&sec@ke99!", "+27838968976");
+        assertEquals(expected, actual);
+        
+    }
+    @Test 
+    public void testInvalidPasswordMessage(){
+        Login passwordTest = new Login();
+        String expected = "Password is not correctly formatted; please ensure that your password contains at least eight characters, a capital letter, a number, and a special character.";
+        String actual = passwordTest.registerUser("Kyle", "Kevins","kyl_1", "password","+27838968976");
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testInvalidCellphoneMessage(){
+        Login cellphoneTest = new Login();
+        String expected = "Cellphone number is incorrectly formatted or does not contain an international country code; Please correct the number and try again";
+        String actual = cellphoneTest.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "08966553");
+        assertEquals(expected, actual);
+    }
+//    @Test
+//    public void testSuccessfulLoginMessage(){
+//     Login loginTest = new Login();
+//     loginTest.registerUser("Kyle", "Kevins","kyl_1", "Ch&&sec@ke99!","+2783896897");
+//     String expected = "Welcome Kyle, Kevins it is great to see you again.";
+//     String actual = loginTest.returnLoginStatus(true);
+//     assertEquals(expected, actual);
+//    }
+//    
     
     /**
      * AssertTrue/False Tests
