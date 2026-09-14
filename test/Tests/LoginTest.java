@@ -31,13 +31,13 @@ public class LoginTest {
      * This specific test checks if the expected message "You have been registered successfully matches the 
      *
      **/
-//    @Test//Tests if 
-//    public void testSuccessfulRegistrationMessage(){
-//     Login registrationSuccess = new Login();
-//     String expected = "Welcome Kyle, Kevins.You have been registered successfully.";
-//     String actual = registrationSuccess.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
-//     assertEquals(expected, actual);
-//    }
+    @Test//Tests if 
+    public void testSuccessfulRegistrationMessage(){
+     Login registrationSuccess = new Login();
+     String expected = "Welcome Kyle, Kevins.You have been registered successfully.";
+     String actual = registrationSuccess.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+     assertEquals(expected, actual);
+    }
     @Test
     public void testInvalidUsernameMessage(){
         Login usernameTest = new Login();
@@ -60,15 +60,15 @@ public class LoginTest {
         String actual = cellphoneTest.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "08966553");
         assertEquals(expected, actual);
     }
-//    @Test
-//    public void testSuccessfulLoginMessage(){
-//     Login loginTest = new Login();
-//     loginTest.registerUser("Kyle", "Kevins","kyl_1", "Ch&&sec@ke99!","+2783896897");
-//     String expected = "Welcome Kyle, Kevins it is great to see you again.";
-//     String actual = loginTest.returnLoginStatus(true);
-//     assertEquals(expected, actual);
-//    }
-//    
+    @Test
+    public void testSuccessfulLoginMessage(){
+     Login loginTest = new Login();
+     String expected = "Welcome Kyle, Kevins, it is great to see you again.";
+     loginTest.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
+     String actual = loginTest.returnLoginStatus(true);
+     assertEquals(expected, actual);
+    }
+    
     
     /**
      * AssertTrue/False Tests
