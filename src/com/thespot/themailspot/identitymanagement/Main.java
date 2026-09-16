@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
+ * @author Keitumetse Chief Mamakoko
  * 
  * POE: Part 01 of 03 (Registration and Login Features)
  * 
@@ -25,70 +25,10 @@ public class Main {
     private String phonenumber;
     private String firstname;
     private String lastname;
-//    
-//    //Constructor; Sets all fields for the Main class object
-//    public Main (String firstname, String lastname,String username,String password,String phonenumber){
-//        
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.username = username;
-//        this.password = password;
-//        this.phonenumber = phonenumber;
-//        
-//    }
-//    
+
     //Instantiating scanner object: To get user input
     static Scanner userInput = new Scanner(System.in);
-//
-//
-//    //Setters and Getters: To assign to and retrieve data from static variables;
-//    //Public setter method to assign the variable username a value entered by the user
-//    public void setUsername(String username){
-//
-//        this.username = username;   
-//    }
-//    //Public setter method to assign the variable password a value entered by the user
-//    public void setPassword(String password){
-//
-//        this.password = password;
-//    }
-//    //Public setter method to assign the variable cellphone a value entered by the user
-//    public void setCellPhoneNo(String phonenumber){
-//
-//        this.phonenumber = phonenumber;
-//    }
-//    //Public setter method to assign the variable first name a value entered by the user
-//    public void setFirstName(String firstname){
-//        this.firstname = firstname;
-//    }
-//    public void setLastName (String lastname){
-//        this.lastname = lastname;
-//    }
-//    
-//    //Getter methods for retrieving the username, password and cellphone number as entered by the user
-//    //Method to retrieve the stored username(sanitised)
-//    public String getUsername(){
-//        return username;
-//    }
-//    //Method to retrieve the stored password(sanitied)
-//    public String getPassword(){
-//        return password;
-//    }
-//    //Method to retrieve the stored cellphone number(sanitised)
-//    public String getCellphoneNo(){
-//        return phonenumber;
-//
-//    }
-//    //Method to retrieve the stored first name from the user
-//    public String getFirstName(){
-//        return firstname;
-//    
-//    }
-//    //Method to retrieve the stored last name from the user
-//    public String getLastName(){
-//        return lastname;
-//    
-//    }
+
 
   
     public static void main(String[] args) {
