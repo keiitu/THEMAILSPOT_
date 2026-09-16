@@ -15,8 +15,15 @@ import java.util.Scanner;
  * 
  */
 
-//This program will create an account by entering a username, password, and South African cellphone number
-//Main class: Focuses on entry point and user interaction
+/**
+ * 
+ * This program will allow the user to create an account by entering a username, password, and South African cellphone number:
+ * 
+ * Main class: The entry point to the program; This class is responsible for handling registration
+ * 
+ 
+ */
+
 
 public class Main {
     //Instance variables required for registration: These variables will hold the values that the user inputs
@@ -30,7 +37,7 @@ public class Main {
     static Scanner userInput = new Scanner(System.in);
 
 
-  
+  //The main method: Executes the registration/login flow
     public static void main(String[] args) {
         //Welcoming the user to the program
         System.out.println("""
@@ -135,6 +142,8 @@ public class Main {
         
         
         //Login 
+        System.out.println("LOGIN");
+        
         //Variables to hold user input values for loggin into the system
         String loginUsername;
         String loginPassword;
