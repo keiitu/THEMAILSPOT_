@@ -7,7 +7,7 @@ package com.thespot.themailspot.identitymanagement;
 
 /**
  *
- * @author Keitumetse Chief Mamakoko: Student @Rosebank International - Student No: 10496139
+ * @author Keitumetse Chief Mamakoko: 
  * 
  * POE: Part 01 of 03 (Registration and Login Features)
  */
