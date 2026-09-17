@@ -123,7 +123,7 @@ public class Main {
         }
         //While loop to keep prompting the user to enter a cellphone number if they enter a number that doesn't satisfy the requirements
         while (true){
-            System.out.println ("Please enter a valid South African number: ");
+            System.out.println ("Please enter a valid South African number (The number must lead with the South African international code: ");
             cellphone = userInput.nextLine();
             
             //If statement to relay conditions: The cellphone number must contain the South African International Country code
