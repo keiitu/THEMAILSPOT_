@@ -107,7 +107,7 @@ public class Main {
         while(true){
             
             
-            System.out.println("Please enter a password (The password must contain at least 8 characters , have a special character: ");
+            System.out.println("Please enter a password (Your password must contain at least 8 characters , contains a number, a capital letter and a special character): ");
             password = userInput.nextLine();
             
             //If statement to relay conditions: The password must contain at least 8 characters long, have a special character, number, and a capital letter
@@ -123,7 +123,7 @@ public class Main {
         }
         //While loop to keep prompting the user to enter a cellphone number if they enter a number that doesn't satisfy the requirements
         while (true){
-            System.out.println ("Please enter a valid South African number (The number must lead with the South African international code: ");
+            System.out.println ("Please enter a valid South African number (The number must lead with the South African international code +27): ");
             cellphone = userInput.nextLine();
             
             //If statement to relay conditions: The cellphone number must contain the South African International Country code
