@@ -41,11 +41,12 @@ public class Main {
         //Welcoming the user to the program and outlining the requirements for account creation
         System.out.println("""
                            Welcome to The Mail Spot.
-                           Registration requires the following:
-                           - Firstname
-                           - Lastname
-                           - Username
-                           - South African Cellphone Number
+                           Please note that account registration requires the following:
+                           - First name
+                           - Last name
+                           - Valid Username
+                           - Valid Password
+                           - Valid South African Cellphone Number
                            """);
         
       
@@ -62,6 +63,7 @@ public class Main {
         
         //Account Creation/Registration 
         System.out.println("REGISTRATION");
+        
         
         
         
@@ -85,7 +87,7 @@ public class Main {
         //While loop to keep prompting the user to enter their username if they enter a wrongly formatted username
         while(true){
             
-            System.out.println("Please enter your username: ");
+            System.out.println("Please enter your username (The username must not be over 5 characters in length, and should contain an underscore): ");
             username = userInput.nextLine();
             
             //If statement to relay conditions: username must not be over 5 characters in length, and should contain an underscore
@@ -105,7 +107,7 @@ public class Main {
         while(true){
             
             
-            System.out.println("Please enter a password: ");
+            System.out.println("Please enter a password (The password must contain at least 8 characters , have a special character: ");
             password = userInput.nextLine();
             
             //If statement to relay conditions: The password must contain at least 8 characters long, have a special character, number, and a capital letter
@@ -142,6 +144,7 @@ public class Main {
         
         //Login Message
         System.out.println("LOGIN");
+       
         
         //Variables to hold user input values for logging into the system
         String loginUsername;
