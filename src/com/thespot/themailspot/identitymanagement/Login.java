@@ -136,7 +136,7 @@ public class Login {
                 this.storedCellphone = cellphone;
                 
                 //returning message (includes the user's first name and last name)
-                return "Welcome " + firstname + ", " + lastname + "." + "You have been registered successfully.";
+                return "Welcome " + firstname + ", " + lastname + "." + " it is great to see you.";
                 
                 
                 
