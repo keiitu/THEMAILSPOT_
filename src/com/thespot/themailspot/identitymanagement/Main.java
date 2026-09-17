@@ -20,7 +20,9 @@ import java.util.Scanner;
  * 
  * 
  * 
- * Main class: The entry point to the program; This class is responsible for handling registration
+ * Main class: The entry point to the program; This class is responsible for handling user interaction:
+ * prompting for input, running validation loops,and displaying messages. It uses a scanner to read from the console.
+ * 
  * 
  
  */
@@ -36,7 +38,7 @@ public class Main {
 
   //The main method: Executes the registration/login flow
     public static void main(String[] args) {
-        //Welcoming the user to the program: Message outlining the requirements for account creation
+        //Welcoming the user to the program and outlining the requirements for account creation
         System.out.println("""
                            Welcome to The Mail Spot.
                            Registration requires the following:
@@ -138,10 +140,10 @@ public class Main {
         System.out.println("\n" + registeredUser);
         
         
-        //Login 
+        //Login Message
         System.out.println("LOGIN");
         
-        //Variables to hold user input values for loggin into the system
+        //Variables to hold user input values for logging into the system
         String loginUsername;
         String loginPassword;
         //Boolean variable to indicate whether the user has logged in or not; This will only be true if the user enters the correct log in details
