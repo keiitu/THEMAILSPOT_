@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 
  * POE: Part 01 of 03 (Registration and Login Features)
  * 
- * This program will allow the user to create an account by entering a username, password, and South African cellphone number:
+ * This program will allow the user to create an account by entering their first name, last name, username, password, and South African cellphone number:
  * 
  */
 
@@ -115,11 +115,11 @@ public class Main {
                break;
            }else{
                
-               System.out.println("Your password is incorrectly formatted. Please ensure that your password contains at least 8 characters long, contains a number, a capital letter and a special character");
+               System.out.println("Your password is incorrectly formatted. Please ensure that your password contains at least 8 characters , contains a number, a capital letter and a special character");
            }
             
         }
-        //While loopto keep prompting the user to enter a cellphone number if they enter a number that doesn't satisfy the requirements
+        //While loop to keep prompting the user to enter a cellphone number if they enter a number that doesn't satisfy the requirements
         while (true){
             System.out.println ("Please enter a valid South African number: ");
             cellphone = userInput.nextLine();
