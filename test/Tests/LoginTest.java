@@ -1,9 +1,5 @@
 package Tests;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 
 
 
@@ -34,7 +30,7 @@ public class LoginTest {
     @Test//Tests if registration flow works as desired
     public void testSuccessfulRegistrationMessage(){
      Login registrationSuccess = new Login();
-     String expected = "Welcome Kyle, Kevins.You have been registered successfully.";
+     String expected = "Welcome Kyle, Kevins. it is great to see you.";
      String actual = registrationSuccess.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
      assertEquals(expected, actual);
     }
