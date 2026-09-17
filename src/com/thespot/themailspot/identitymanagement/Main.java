@@ -12,12 +12,13 @@ import java.util.Scanner;
  * 
  * POE: Part 01 of 03 (Registration and Login Features)
  * 
+ * This program will allow the user to create an account by entering a username, password, and South African cellphone number:
  * 
  */
 
 /**
  * 
- * This program will allow the user to create an account by entering a username, password, and South African cellphone number:
+ * 
  * 
  * Main class: The entry point to the program; This class is responsible for handling registration
  * 
@@ -26,12 +27,6 @@ import java.util.Scanner;
 
 
 public class Main {
-    //Instance variables required for registration: These variables will hold the values that the user inputs
-    private String username;
-    private String password;
-    private String phonenumber;
-    private String firstname;
-    private String lastname;
 
     //Instantiating scanner object: To get user input
     static Scanner userInput = new Scanner(System.in);
