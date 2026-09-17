@@ -30,11 +30,13 @@ public class Main {
 
     //Instantiating scanner object: To get user input
     static Scanner userInput = new Scanner(System.in);
+    
+    
 
 
   //The main method: Executes the registration/login flow
     public static void main(String[] args) {
-        //Welcoming the user to the program
+        //Welcoming the user to the program: Message outlining the requirements for account creation
         System.out.println("""
                            Welcome to The Mail Spot.
                            Registration requires the following:
