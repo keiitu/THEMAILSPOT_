@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Keitumetse Chief Mamakoko
  * 
- * POE: Part 01 of 03 (Registration and Login Features)
+ * POE: Part 02 of 03 (Registration and Login Features)
  * 
  * This program will allow the user to create an account by entering their first name, last name, username, password, and South African cellphone number:
  * 
