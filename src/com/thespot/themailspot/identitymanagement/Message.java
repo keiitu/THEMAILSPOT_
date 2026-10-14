@@ -114,12 +114,12 @@ public class Message {
                            """);
         int chosenOption = userChoice.nextInt();
         //Method level variables
-        int size = 3;
-        String status;
+    
+//        String status;
         
         
         //Switch statement for the menu:
-        switch (size){
+        switch (chosenOption){
             case 1:
                 status = "sent";
                 return "Message successfully sent.";
