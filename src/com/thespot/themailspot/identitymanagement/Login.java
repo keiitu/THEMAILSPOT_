@@ -9,7 +9,7 @@ package com.thespot.themailspot.identitymanagement;
  *
  * @author Keitumetse Chief Mamakoko: 
  * 
- * POE: Part 01 of 03 (Registration and Login Features)
+ * POE: Part 02 of 03 (Registration and Login Features)
  */
 
 //This program will validate the username, password, and South African cellphone number that is entered by the user
