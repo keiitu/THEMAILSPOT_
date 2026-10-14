@@ -1,5 +1,5 @@
 package com.thespot.themailspot.identitymanagement;
-
+import java.util.Scanner;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -11,6 +11,9 @@ package com.thespot.themailspot.identitymanagement;
  * POE Part 02 of 03: Message feature
  */
 public class Message {
+    //Instantating scanner
+    Scanner userInput = new Scanner(System.in);
+    
     //Object-level variables
     private String messageID;
     private String recipient;
@@ -18,6 +21,8 @@ public class Message {
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
     private String status;//To show what action is undertaken after the user choses an action
+    
+  
     
     //Constructor
     public Message (String messageID, String recipient, String messageText, int messageNumber){
@@ -93,6 +98,49 @@ public class Message {
         
        return messageHash;   
     }
+    //Sent Message method: Allows the user to choose whether to send, disregard, or to store a message to send later
+    public String sentMessage(){
+        //Instantiating scanner to read user input
+        Scanner userChoice = new Scanner(System.in);
+        //Displaying per-message menu:
+        System.out.println("MENU");
+        System.out.println("""
+                           (1) Send Message
+                           
+                           (2) Disregard Message
+                           
+                           (3) Store Message
+                           
+                           """);
+        int chosenOption = userChoice.nextInt();
+        //Method level variables
+        int size = 3;
+        String status;
+        
+        
+        //Switch statement for the menu:
+        switch (size){
+            case 1:
+                status = "sent";
+                return "Message successfully sent.";
+ 
+            case 2:
+                status = "discarded";
+                return  "Press 0 to delete the message";
+                
+            case 3: 
+                status = "stored";
+                return "Message successfully stored";
+                
+            default:
+                return "invalid choice";
+                
+        }
+       
+        
+    
+    }
+    
     
     
     
