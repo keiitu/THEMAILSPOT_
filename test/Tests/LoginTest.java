@@ -34,6 +34,7 @@ public class LoginTest {
      String actual = registrationSuccess.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
      assertEquals(expected, actual);
     }
+   
     @Test//Test invalid username case
     public void testInvalidUsernameMessage(){
         Login usernameTest = new Login();
