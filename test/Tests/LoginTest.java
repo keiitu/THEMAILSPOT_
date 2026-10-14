@@ -70,6 +70,13 @@ public class LoginTest {
         String actual = cellphoneTest.registerUser("Kyle", "Kevins", "kyl_1", "Ch&&sec@ke99!", "08966553");
         assertEquals(expected, actual);
     }
+    @Test//Tests valid cellphone capture
+    public void testValidcellphoneMessage(){
+        Login cellphoneTest = new Login();
+        String expected = "Cellphone number successfully captured";
+        String actual = cellphoneTest.getReturnCellphoneValid("+27838968976");
+        assertEquals(expected, actual);
+    }
     @Test//Tests if login flow works as expected
     public void testSuccessfulLoginMessage(){
      Login loginTest = new Login();
