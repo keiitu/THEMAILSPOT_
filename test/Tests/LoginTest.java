@@ -92,6 +92,14 @@ public class LoginTest {
     assertTrue("Cellphone should be correctly formatted", result);
    }
    
+   @Test
+   public void testLoginUser(){
+       Login loginUsertest = new Login();
+       loginUsertest.registerUser("Kyle","Kevins","kyl_1","Ch&&sec@ke99!","+27838968976");
+       boolean result = loginUsertest.loginUser("kyl_1","Ch&&sec@ke99!");
+       assertTrue("User should  be able to login", result);
+   }
+   
    //AssertFalse tests
    @Test
    public void testUsernameInvalid(){
@@ -112,6 +120,14 @@ public class LoginTest {
        Login cellphoneTest = new Login();
        boolean result = cellphoneTest.checkCellPhoneNumber("08966553");//Assigns result from checking the validity of the cellphone to the boolean variable "result"
        assertFalse("Cellphone should be incorrectly formatted", result);
+   }
+   
+   @Test
+   public void testLoginUserInvalid(){
+       Login loginUsertest = new Login();
+       loginUsertest.registerUser("Kyle","Kevins","kyl_1","Ch&&sec@ke99!","+27838968976");
+       boolean result = loginUsertest.loginUser("kyle!!!!!!!","08966553");
+       assertFalse("User should not be able to login", result);
    }
    
    
