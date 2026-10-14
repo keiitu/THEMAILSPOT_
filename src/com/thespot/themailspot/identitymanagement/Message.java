@@ -8,6 +8,7 @@ package com.thespot.themailspot.identitymanagement;
 /**
  *
  * @author Keitumetse Chief Mamakoko
+ * POE Part 02 of 03: Message feature
  */
 public class Message {
     
