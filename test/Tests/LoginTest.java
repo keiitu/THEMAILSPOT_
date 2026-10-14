@@ -7,7 +7,7 @@ package Tests;
  *
  * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
  * 
- * POE: Part 01 of 03 (Registration and Login Features)
+ * POE: Part 02 of 03 (Registration and Login Features)
  * 
  * 
  * 
