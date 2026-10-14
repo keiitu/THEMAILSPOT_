@@ -42,7 +42,7 @@ public class LoginTest {
         assertEquals(expected, actual);
         
     }
-    @Test//Test username capture
+    @Test//Test valid username capture
     public void testValidusernameMessage(){
         Login usernameTest = new Login();
         String expected = "Username has been captured successfully";
@@ -54,6 +54,13 @@ public class LoginTest {
         Login passwordTest = new Login();
         String expected = "Password is not correctly formatted; please ensure that your password contains at least eight characters, a capital letter, a number, and a special character.";
         String actual = passwordTest.registerUser("Kyle", "Kevins","kyl_1", "password","+27838968976");
+        assertEquals(expected, actual);
+    }
+    @Test //Tests valid password capture
+    public void testValidpasswordCapture(){
+        Login passwordTest = new Login();
+        String expected = "Password has been successfully captured";
+        String actual = passwordTest.getReturnPasswordValid("Ch&&sec@ke99!");
         assertEquals(expected, actual);
     }
     @Test//Tests invalid cellphone message
