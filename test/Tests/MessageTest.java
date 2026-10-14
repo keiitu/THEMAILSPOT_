@@ -6,7 +6,7 @@ package Tests;
 
 /**
  *
- * @author Dell
+ * POE Part 02 of 03: Message feature
  */
 public class MessageTest {
     
