@@ -71,7 +71,10 @@ public class Login {
         /*Regex-based methods to determine password complexity and to validate cellphone number:
         Credits: codaddict, Alan Moore, Isu_guy, Arnaud, and Ishmael Makitla on StackOverflow
         The following code blocks have been adapted to my own approach,and the requirements of the POE
-        though I have been thoroughly informed by the abovementioned through their comments in terms of regex manipulation and generation*/
+        though I have been thoroughly informed by the abovementioned through their comments in terms of regex manipulation and generation
+            
+            Retrievable source: https://www.w3schools.com/java/java_regex.asp 
+            */
             public boolean checkCellPhoneNumber(String cellphone){
                 
                 return cellphone.matches("^\\+27[0-9]{9}$");
