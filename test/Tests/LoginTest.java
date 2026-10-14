@@ -42,6 +42,13 @@ public class LoginTest {
         assertEquals(expected, actual);
         
     }
+    @Test//Test username capture
+    public void testValidusernameMessage(){
+        Login usernameTest = new Login();
+        String expected = "Username has been captured successfully";
+        String actual = usernameTest.getReturnUsernameValid("kyl_1");
+        assertEquals (expected, actual);
+    }
     @Test //Tests invalid password case
     public void testInvalidPasswordMessage(){
         Login passwordTest = new Login();
