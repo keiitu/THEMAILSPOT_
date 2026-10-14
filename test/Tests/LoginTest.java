@@ -64,6 +64,15 @@ public class LoginTest {
      String actual = loginTest.returnLoginStatus(true);
      assertEquals(expected, actual);
     }
+    @Test//Tests if failed login status works as expected
+    public void testFailedloginMessage(){
+      Login loginTest = new Login();
+      loginTest.registerUser("Kyle","Kevins","kyl_1","Ch&&sec@ke99!","+27838968976");
+      loginTest.loginUser("kyle!!!!!!!", "password");
+      String expected = "Username or password incorrect. Please try again";
+      String actual = loginTest.returnLoginStatus(true);
+    }
+    
     
     
     /**
