@@ -1,5 +1,18 @@
 package com.thespot.themailspot.identitymanagement;
+//Scanner Import
 import java.util.Scanner;
+//Array list import
+import java.util.ArrayList;
+import java.util.List;
+//Input/output imports
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+//Gson imports
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -11,6 +24,9 @@ import java.util.Scanner;
  * POE Part 02 of 03: Message feature
  */
 public class Message {
+    //Class -level variable
+    private static int totalMessages = 0;
+    private static List<Message> sentMessages = new ArrayList<>();
     //Instantating scanner
     Scanner userInput = new Scanner(System.in);
     
@@ -21,6 +37,7 @@ public class Message {
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
     private String status;//To show what action is undertaken after the user choses an action
+    
     
   
     
@@ -94,52 +111,75 @@ public class Message {
            combinedWords = firstWord + lastWord;
         }
         //Building the message hash
-        messageHash = preIDchar+ ":" + textChar + combinedWords;
+        messageHash = preIDchar+ ":" + messageNumber + combinedWords;
         
        return messageHash;   
     }
     //Sent Message method: Allows the user to choose whether to send, disregard, or to store a message to send later
-    public String sentMessage(){
+    public String SentMessage(){
         //Instantiating scanner to read user input
         Scanner userChoice = new Scanner(System.in);
+        //Scanner intentionally not closed to avoid closing System.in, which would break the Scanner used in Main
         //Displaying per-message menu:
         System.out.println("MENU");
-        System.out.println("""
-                           (1) Send Message
-                           
-                           (2) Disregard Message
-                           
-                           (3) Store Message
-                           
-                           """);
-        int chosenOption = userChoice.nextInt();
-        //Method level variables
-    
-//        String status;
+        while (true){             
+            System.out.println("""
+                               (1) Send Message
+
+                               (2) Disregard Message
+
+                               (3) Store Message
+
+                               """);
+            int chosenOption = userChoice.nextInt();
+
+            //Switch statement for the menu:
+            switch (chosenOption){
+                case 1:
+                    status = "sent";
+                    sentMessages.add(this);
+                    return "Message successfully sent.";
+                    
+
+                case 2:
+                    status = "discarded";
+                    return  "Press 0 to delete the message.";
+
+                case 3: 
+                    status = "stored";
+                    return "Message successfully stored.";
+
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+                    break;
+
+            }
         
-        
-        //Switch statement for the menu:
-        switch (chosenOption){
-            case 1:
-                status = "sent";
-                return "Message successfully sent.";
- 
-            case 2:
-                status = "discarded";
-                return  "Press 0 to delete the message";
-                
-            case 3: 
-                status = "stored";
-                return "Message successfully stored";
-                
-            default:
-                return "invalid choice";
-                
+       }
+    }
+    //Retun total message method: returns the total number of messages sent
+    public int returnTotalMessages(){
+        return sentMessages.size();
+    }
+    //Print Message method: returns all the messages sent while the program is running
+    public String printMessages(){
+        //Instantiating string builder
+        StringBuilder sb = new StringBuilder();
+        //If statement to relay empty case condition
+        if (sentMessages.isEmpty()){
+            return "No messages sent.";
         }
-       
-        
+        //Looping through the list and appending the strings
+        for (Message msg : sentMessages){
+            sb.append("Recipient: ");sb.append(msg.getRecipient()).append("\n");
+            sb.append("Message: ");sb.append(msg.getMessageText()).append("\n");
+            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
+        }
+        return sb.toString();
+    
     
     }
+  
     
     
     
