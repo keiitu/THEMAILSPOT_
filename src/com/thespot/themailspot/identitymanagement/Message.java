@@ -9,9 +9,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+//java language import
+import java.lang.reflect.Type;
 //Gson imports
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -176,9 +179,54 @@ public class Message {
             sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
         }
         return sb.toString();
-    
-    
     }
+    /**
+     * Store messages method: stores messages in a JSON file
+     * 
+     * Retrievable source: https://www.baeldung.com/gson-save-file
+     * 
+     * 
+     **/
+    public void storeMessage(){
+        //Instantiating the Gson Object
+        Gson gson = new Gson();
+        //Creating new file object for "messages.json"
+        File file = new File("messages.json");
+        //Creating an empty list to hold all the messages
+        List<Message> messages = new ArrayList<>();
+        
+        //Reads existing messages into the list if the file exists
+        if (file.exists()){
+            try (FileReader reader = new FileReader(file)){
+                //Defining the type using TypeToken
+                Type listType = new TypeToken<List<Message>>(){}.getType();
+                //Reading JSON into the list using gson.fromJson
+                messages = gson.fromJson(reader, listType);
+                //Relaying conditions if file was empty or malformed
+                if (messages == null){
+                    messages = new ArrayList<>();
+                }
+                
+            }catch (IOException e){
+                System.out.println("Error reading messages file: " + e.getMessage());
+                return;
+            }
+            
+        }
+        //Adding this message to the list
+        messages.add(this);
+        
+        //Writing the full list back to the file
+        try (FileWriter writer = new FileWriter(file)){
+            gson.toJson(messages, writer);
+        }catch(IOException e){
+            System.out.println("Error writing messages file: " + e.getMessage());
+        }
+        
+    }
+    
+    
+    
   
     
     
