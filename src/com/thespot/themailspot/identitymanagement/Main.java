@@ -1,5 +1,8 @@
 package com.thespot.themailspot.identitymanagement;
 import java.util.Scanner;
+//Random number generator import
+import java.util.Random;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -139,7 +142,7 @@ public class Main {
         
         //Registering the user
         registeredUser = registrationData.registerUser(firstname, lastname, username, password, cellphone);
-        System.out.println("\n" + registeredUser);
+        System.out.println(registeredUser + "\n");
         
         
         //Login Message
@@ -165,7 +168,7 @@ public class Main {
             //If statement to relay the login status conditions
             if(registrationData.loginUser(loginUsername, loginPassword)){
             
-            System.out.println(registrationData.returnLoginStatus(true));
+            System.out.println(registrationData.returnLoginStatus(true) + "\n");
             isLogged = true;
             
             
@@ -173,6 +176,87 @@ public class Main {
                     System.out.println(registrationData.returnLoginStatus(false));
                     }
         }
+        
+        
+        //Welcoming user to the program
+        System.out.println("WELCOME PAGE");
+        System.out.println("Welcome to QuickChat");
+         //Creating the Message Object
+        
+        //Main menu loop
+        boolean running = true;
+        while (running){
+            System.out.println("\n1) Send Messages");
+            System.out.println("2) Show recently sent messages (Coming soon)");
+            System.out.println("3) Quit");
+            System.out.print("Choose: ");
+            int choice = userInput.nextInt();
+            userInput.nextLine();//Consumes the newline
+            
+            //If statement to relay what happens when any choice is selcted
+            if (choice == 1){
+                //Asking user how many messages they want to send
+                System.out.print("How many messages do you want to send? ");
+                int numMessages = userInput.nextInt();
+                userInput.nextLine();//Consume newline
+                
+                //Looping for the many numbers the user wants to send messages
+                for(int i = 0; i < numMessages; i++){
+                    //Instantiating random class object
+                    Random rand = new Random();
+                    //Generating random ID a message
+                    String id = String.format("%010d", rand.nextInt(1_000_000_000));
+                    //Validating messageID
+                 
+                    
+                    //Asking for the recipient's number
+                    System.out.print("Enter recipient cell number (Should start with South African International Code: +27): ");
+                    String recipient = userInput.nextLine();
+                    //Checking if the recipient cell number adheres to the conditions laid out for it
+                  
+                    
+                    //Asking the user for a message text
+                    System.out.print("Enter message (max 250 characters): ");
+                    String messageText = userInput.nextLine();
+                    
+                    //Instantiating the message class object
+                    Message msg = new Message (id, recipient, messageText, i);
+                    
+                    //Validating the message class object
+                    if (!msg.checkMessageID(id)){
+                        System.out.println("Message ID error.");
+                      
+                    }
+                    
+                    //Validating the recipient cellphone number
+                    String recipientStatus = msg.checkRecipientCell(recipient);
+                    if(!recipientStatus.equals("Cellphone number successfuly captured")){
+                        System.out.println(recipientStatus);
+     
+                    }
+                    
+                    //Validating the message description of the user
+                    String lengthStatus = msg.checkMessageLength();
+                    if (!lengthStatus.equals("Message ready to be sent.")){
+                        System.out.println(lengthStatus + "\n");
+                    }
+                    
+                    //Generating the message hash when all validation passes
+                    msg.createMessageHash();
+                    
+                    //Presenting the menu to the user
+                    String menu = msg.SentMessage();
+                    System.out.println(menu);
+                           
+                }
+            }else if (choice == 2){
+                System.out.println("Coming soon");
+            }else if (choice == 3){
+                running = false;
+            }
+            
+        }
+        
         
         //Closing the scanner
         userInput.close();
