@@ -30,6 +30,7 @@ public class Message {
     //Class -level variable
     private static int totalMessages = 0;
     private static List<Message> sentMessages = new ArrayList<>();
+    private static final int MAX_MESSAGE_LENGTH = 250;
     //Instantating scanner
     Scanner userInput = new Scanner(System.in);
     
@@ -51,6 +52,7 @@ public class Message {
        this.messageText = messageText;
        this.messageNumber = messageNumber;
     }
+  
     //Getters
     public String getMessageID(){
         return messageID;   
@@ -71,6 +73,7 @@ public class Message {
         return messageNumber;
     }
     
+    
     //Check MessageID method: Returns true if the messageID length is not more than 10 characters long
     public Boolean checkMessageID(String messageID){
         //Method-level variable
@@ -88,6 +91,17 @@ public class Message {
         }else{
           return "Cellphone number is incorrectly formatted or does not contain international code. Please correct the number and try again";
         }
+    }
+    //Check message length method: Validates the length of the message typed by the user
+    public String checkMessageLength(){
+        //If statement to relay conditions when the user enters a message that is above 250 characters
+        if (this.messageText.length() > MAX_MESSAGE_LENGTH){
+            return "Please enter a message of less than 250 characters";
+            
+        }else{
+            return "Message ready to be sent";
+        }
+        
     }
     //Create messageHash method: The system autogenerates a message hash which contains the first two numbers of the message ID, a colon(:), the number of the message(:), and the first and last words in the message
     //The Hash must be diplayed in all caps
@@ -124,17 +138,19 @@ public class Message {
         Scanner userChoice = new Scanner(System.in);
         //Scanner intentionally not closed to avoid closing System.in, which would break the Scanner used in Main
         //Displaying per-message menu:
-        System.out.println("MENU");
+        System.out.println("Select what you want to do with the message: ");
         while (true){             
             System.out.println("""
-                               (1) Send Message
+                               1) Send Message
 
-                               (2) Disregard Message
+                               2) Disregard Message
 
-                               (3) Store Message
+                               3) Store Message
 
                                """);
+            System.out.println("Choose: ");
             int chosenOption = userChoice.nextInt();
+            userChoice.nextLine();
 
             //Switch statement for the menu:
             switch (chosenOption){
@@ -174,9 +190,9 @@ public class Message {
         }
         //Looping through the list and appending the strings
         for (Message msg : sentMessages){
-            sb.append("Recipient: ");sb.append(msg.getRecipient()).append("\n");
-            sb.append("Message: ");sb.append(msg.getMessageText()).append("\n");
-            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
+            sb.append("Recipient: ");sb.append(recipient).append("\n");
+            sb.append("Message: ");sb.append(messageText).append("\n");
+            sb.append("Message Hash: ");sb.append(messageHash).append("\n");
         }
         return sb.toString();
     }
