@@ -232,7 +232,7 @@ public class Main {
                     //Validating the recipient cellphone number
                     String recipientStatus = msg.checkRecipientCell(recipient);
                     if(!recipientStatus.equals("Cell phone number successfuly captured")){
-                        System.out.println(recipientStatus);
+                        System.out.println(recipientStatus + "\n");
      
                     }
                     
