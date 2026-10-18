@@ -24,8 +24,6 @@ public class LoginTest {
    /**
      * AssertEquals Tests
      * Tests if all the methods within the Login Class(Responsible for data validation) work as expected.
-     * 
-     *
      **/
     @Test//Tests if registration flow works as desired
     public void testSuccessfulRegistrationMessage(){
