@@ -256,7 +256,10 @@ public class Main {
                     System.out.println(menu);
                            
                 }
-                System.out.println("Total messages sent: " + new Message("", "", "", 0).returnTotalMessages());
+               // Printing report for the recentclysent messages
+                Message printer = new Message("", "", "", 0); // Dummy object to access the static list
+                System.out.println("\n--- RECENTLY SENT MESSAGES ---");
+                System.out.println(printer.printMessages());
             }else if (choice == 2){
                 System.out.println("Coming soon");
             }else if (choice == 3){
