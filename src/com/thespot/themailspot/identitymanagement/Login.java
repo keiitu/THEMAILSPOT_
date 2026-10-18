@@ -73,8 +73,8 @@ public class Login {
         The following code blocks have been adapted to my own approach,and the requirements of the POE
         though I have been thoroughly informed by the abovementioned through their comments in terms of regex manipulation and generation
             
-            Retrievable source: https://www.w3schools.com/java/java_regex.asp 
-            */
+        Secondary Retrievable source: W3Schools. [s.a]. Regular Expressions. W3Scools.[s.a].[Online]. Available at: https://www.w3schools.com/java/java_regex.asp 
+        */
             public boolean checkCellPhoneNumber(String cellphone){
                 
                 return cellphone.matches("^\\+27[0-9]{9}$");
