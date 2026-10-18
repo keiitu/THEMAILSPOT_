@@ -209,7 +209,7 @@ public class Message {
         
    
         // Read existing messages if the file already exists AND is not empty
-        if (file.exists() && file.length() > 0) {  // <--- ADD THE LENGTH CHECK
+        if (file.exists() && file.length() > 0) {  
             try (FileReader reader = new FileReader(file)) {
                 Type listType = new TypeToken<List<Message>>(){}.getType();
                 messages = gson.fromJson(reader, listType);
