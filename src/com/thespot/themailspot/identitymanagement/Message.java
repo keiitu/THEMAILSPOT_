@@ -159,8 +159,11 @@ public class Message {
 
                 case 2:
                     status = "discarded";
-                    return  "Press 0 to delete the message.";
-
+                    System.out.println("Press 0 to delete the message.");
+                    int deleteChoice = userChoice.nextInt();
+                    // The message is discarded simply by NOT being saved to the list.
+                    return "Press 0 to delete the message.";//Adhering to the POE requirements (UX tradeoff)
+                    
                 case 3: 
                     status = "stored";
                     storeMessage();
@@ -197,9 +200,8 @@ public class Message {
     /**
      * Store messages method: stores messages in a JSON file
      * 
-     * Retrievable source: https://www.baeldung.com/gson-save-file
-     * 
-     * 
+     * Retrievable source: 
+     * Baeldung.2024.Save Data to a JSON File with Gson. Baeldung.2025. [Online]. Available at: https://www.baeldung.com/gson-save-file 
      **/
     public void storeMessage(){
         //Instantiating the Gson Object
