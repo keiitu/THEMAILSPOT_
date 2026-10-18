@@ -77,7 +77,7 @@ public class Message {
         return messageID.length() <= requiredLength;
         
     }
-    //Check RecipientCell method: Returns true if the recipient's cellphone number starts with South African International Code and is no more than 10 characters long
+    //Check RecipientCell method: Returns the necessary messaging depending whether the recipient's cellphone number starts with South African International Code and is no more than 10 characters long
     public String checkRecipientCell(String recipient){
         Login cellNumCheck = new Login ();
         //If statement to relay conditions: Recipient phone numnber must contain South African International Code and is no more than 10 characters long
@@ -88,11 +88,11 @@ public class Message {
         }
     }
     //Check message length method: Validates the length of the message typed by the user
- public String checkMessageLength(String messageText) {
-    if (messageText.length() <= 250) {
+    public String checkMessageLength(String messageText) {
+    if (messageText.length() <= MAX_MESSAGE_LENGTH) {
         return "Message ready to send.";
     } else {
-        int excess = messageText.length() - 250;
+        int excess = messageText.length() - MAX_MESSAGE_LENGTH;
         return "Message exceeds 250 characters by " + excess + "; please reduce the size.";
     }
 }
