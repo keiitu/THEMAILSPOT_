@@ -29,7 +29,7 @@ import com.google.gson.reflect.TypeToken;
 public class Message {
     //Class -level variable
     private static int totalMessages = 0;
-    private static List<Message> sentMessages = new ArrayList<>();
+    public static List<Message> sentMessages = new ArrayList<>();
     private static final int MAX_MESSAGE_LENGTH = 250;
    
     //Object-level variables
@@ -187,9 +187,9 @@ public class Message {
         }
         //Looping through the list and appending the strings
         for (Message msg : sentMessages){
-            sb.append("Recipient: ");sb.append(recipient).append("\n");
-            sb.append("Message: ");sb.append(messageText).append("\n");
-            sb.append("Message Hash: ");sb.append(messageHash).append("\n");
+            sb.append("Recipient: ");sb.append(msg.getRecipient()).append("\n");
+            sb.append("Message: ");sb.append(msg.getMessageText()).append("\n");
+            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
         }
         return sb.toString();
     }
