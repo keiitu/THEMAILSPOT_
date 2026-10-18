@@ -230,14 +230,14 @@ public class Main {
                     
                     //Validating the recipient cellphone number
                     String recipientStatus = msg.checkRecipientCell(recipient);
-                    if(!recipientStatus.equals("Cellphone number successfuly captured")){
+                    if(!recipientStatus.equals("Cell phone number successfuly captured")){
                         System.out.println(recipientStatus);
      
                     }
                     
                     //Validating the message description of the user
-                    String lengthStatus = msg.checkMessageLength();
-                    if (!lengthStatus.equals("Message ready to be sent.")){
+                    String lengthStatus = msg.checkMessageLength(messageText);
+                    if (!lengthStatus.equals("Message ready to send.")){
                         System.out.println(lengthStatus + "\n");
                     }
                     
