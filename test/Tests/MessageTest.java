@@ -10,9 +10,9 @@ import com.thespot.themailspot.identitymanagement.Message;
 /**
  *
  * POE Part 02 of 03: Message feature
+
  */
-
-
+//This program will check if all the methods within the message class execute as expected
 public class MessageTest {
 
     // TEST: checkMessageID(String id)
