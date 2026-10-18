@@ -9,7 +9,9 @@ import com.thespot.themailspot.identitymanagement.Message;
 
 /**
  *
- * POE Part 02 of 03: Message feature
+ * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
+ * 
+ * POE Part 02 of 03: Message feature: 
 
  */
 //This program will check if all the methods within the message class execute as expected
