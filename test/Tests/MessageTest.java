@@ -16,6 +16,31 @@ import com.thespot.themailspot.identitymanagement.Message;
  */
 //This program will check if all the methods within the message class execute as expected
 public class MessageTest {
+    
+    
+    @Test
+    public void testPrintMessages() {
+        // 1. Clear the list to ensure a clean test
+        Message.sentMessages.clear();
+
+        // 2. Create a message
+        Message msg = new Message("0012345678", "+27718693002", "Hi Mike", 0);
+        msg.createMessageHash(); // Generate the hash for the printout
+
+        // 3. Manually add it to the static list (simulating a send)
+        Message.sentMessages.add(msg);
+
+        // 4. Call printMessages
+        String result = msg.printMessages();
+
+        // 5. Assert that the output contains the correct details
+        assertTrue("Output should contain Recipient", result.contains("+27718693002"));
+        assertTrue("Output should contain Message", result.contains("Hi Mike"));
+        assertTrue("Output should contain Hash", result.contains("00:0:HIMIKE"));
+
+        // 6. Clean up
+        Message.sentMessages.clear();
+    }
 
     // TEST: checkMessageID(String id)
 
