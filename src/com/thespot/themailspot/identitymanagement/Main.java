@@ -212,6 +212,7 @@ public class Main {
                     //Asking for the recipient's number
                     System.out.print("Enter recipient cell number (Should start with South African International Code: +27): ");
                     String recipient = userInput.nextLine();
+                    userInput.nextLine();//Consumes newline
                     //Checking if the recipient cell number adheres to the conditions laid out for it
                   
                     
