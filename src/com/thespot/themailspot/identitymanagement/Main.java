@@ -206,42 +206,48 @@ public class Main {
                     Random rand = new Random();
                     //Generating random ID a message
                     String id = String.format("%010d", rand.nextInt(1_000_000_000));
+                    
+                    //Instantiating message object
+                    Message msg = new Message(id, "", "", i);
+                    
                     //Validating messageID
-                 
-                    
-                    //Asking for the recipient's number
-                    System.out.print("Enter recipient cell number (Should start with South African International Code: +27): ");
-                    String recipient = userInput.nextLine();
-             
-                    //Checking if the recipient cell number adheres to the conditions laid out for it
-                  
-                    
-                    //Asking the user for a message text
-                    System.out.print("Enter message (max 250 characters): ");
-                    String messageText = userInput.nextLine();
-                    
+                     if (!msg.checkMessageID(id)) {
+                            System.out.println("Message ID error.");
+                            continue; // Skip this message and move to the next one in the for loop
+                        }
+                
+                    // Looping until the recipient is valid
+                        String recipient = "";
+                        boolean isValidRecipient = false;
+                        while (!isValidRecipient) {
+                            System.out.print("Enter recipient cell number (Must start with: +27...): ");
+                            recipient = userInput.nextLine();
+
+                            String status = msg.checkRecipientCell(recipient);
+                            // NOTE: Check the exact wording of your success message!
+                            if (status.equals("Cell phone number successfully captured.")) {
+                                isValidRecipient = true; 
+                            } else {
+                                System.out.println(status); 
+                            }
+                        }
+                    //Looping until the correct message length has been entered
+                        String messageText = "";
+                        boolean isValidLength = false;
+                        while (!isValidLength) {
+                            System.out.print("Enter message (max 250 characters): ");
+                            messageText = userInput.nextLine();
+
+                            String status = msg.checkMessageLength(messageText);
+                            if (status.equals("Message ready to send.")) {
+                                isValidLength = true;
+                            } else {
+                                System.out.println(status);
+                            }
+                        }
                     //Instantiating the message class object
-                    Message msg = new Message (id, recipient, messageText, i);
-                    
-                    //Validating the message class object
-                    if (!msg.checkMessageID(id)){
-                        System.out.println("Message ID error.");
-                      
-                    }
-                    
-                    //Validating the recipient cellphone number
-                    String recipientStatus = msg.checkRecipientCell(recipient);
-                    if(!recipientStatus.equals("Cell phone number successfuly captured")){
-                        System.out.println(recipientStatus + "\n");
-     
-                    }
-                    
-                    //Validating the message description of the user
-                    String lengthStatus = msg.checkMessageLength(messageText);
-                    if (!lengthStatus.equals("Message ready to send.")){
-                        System.out.println(lengthStatus + "\n");
-                    }
-                    
+                    msg = new Message (id, recipient, messageText, i);
+                                    
                     //Generating the message hash when all validation passes
                     msg.createMessageHash();
                     
@@ -250,6 +256,7 @@ public class Main {
                     System.out.println(menu);
                            
                 }
+                System.out.println("Total messages sent: " + new Message("", "", "", 0).returnTotalMessages());
             }else if (choice == 2){
                 System.out.println("Coming soon");
             }else if (choice == 3){
@@ -257,7 +264,7 @@ public class Main {
             }
             
         }
-        System.out.println("Total messages sent: " + new Message("", "", "", 0).returnTotalMessages());
+
         
         
         //Closing the scanner
