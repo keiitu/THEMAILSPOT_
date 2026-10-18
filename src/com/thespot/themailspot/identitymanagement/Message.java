@@ -87,22 +87,20 @@ public class Message {
         Login cellNumCheck = new Login ();
         //If statement to relay conditions: Recipient phone numnber must contain South African International Code and is no more than 10 characters long
         if (cellNumCheck.checkCellPhoneNumber(recipient)){
-          return "Cellphone number successfully captured";     
+          return "Cell phone number successfully captured.";     
         }else{
-          return "Cellphone number is incorrectly formatted or does not contain international code. Please correct the number and try again";
+          return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
     }
     //Check message length method: Validates the length of the message typed by the user
-    public String checkMessageLength(){
-        //If statement to relay conditions when the user enters a message that is above 250 characters
-        if (this.messageText.length() > MAX_MESSAGE_LENGTH){
-            return "Please enter a message of less than 250 characters";
-            
-        }else{
-            return "Message ready to be sent";
-        }
-        
+ public String checkMessageLength(String messageText) {
+    if (messageText.length() <= 250) {
+        return "Message ready to send.";
+    } else {
+        int excess = messageText.length() - 250;
+        return "Message exceeds 250 characters by " + excess + "; please reduce the size.";
     }
+}
     //Create messageHash method: The system autogenerates a message hash which contains the first two numbers of the message ID, a colon(:), the number of the message(:), and the first and last words in the message
     //The Hash must be diplayed in all caps
     public String createMessageHash(){
@@ -128,7 +126,7 @@ public class Message {
            combinedWords = firstWord + lastWord;
         }
         //Building the message hash
-        messageHash = preIDchar+ ":" + messageNumber + combinedWords;
+        messageHash = preIDchar+ ":" + messageNumber + ":"+  combinedWords;
         
        return messageHash;   
     }
