@@ -31,8 +31,7 @@ public class Message {
     private static int totalMessages = 0;
     private static List<Message> sentMessages = new ArrayList<>();
     private static final int MAX_MESSAGE_LENGTH = 250;
-    //Instantating scanner
-    Scanner userInput = new Scanner(System.in);
+   
     
     //Object-level variables
     private String messageID;
@@ -164,6 +163,7 @@ public class Message {
 
                 case 3: 
                     status = "stored";
+                    storeMessage();
                     return "Message successfully stored.";
 
                 default:
@@ -209,23 +209,22 @@ public class Message {
         //Creating an empty list to hold all the messages
         List<Message> messages = new ArrayList<>();
         
-        //Reads existing messages into the list if the file exists
-        if (file.exists()){
-            try (FileReader reader = new FileReader(file)){
-                //Defining the type using TypeToken
+   
+        // Read existing messages if the file already exists AND is not empty
+        if (file.exists() && file.length() > 0) {  // <--- ADD THE LENGTH CHECK
+            try (FileReader reader = new FileReader(file)) {
                 Type listType = new TypeToken<List<Message>>(){}.getType();
-                //Reading JSON into the list using gson.fromJson
                 messages = gson.fromJson(reader, listType);
-                //Relaying conditions if file was empty or malformed
-                if (messages == null){
+                if (messages == null) {
                     messages = new ArrayList<>();
                 }
-                
-            }catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Error reading messages file: " + e.getMessage());
                 return;
+            } catch (com.google.gson.JsonSyntaxException e) {
+                // If the file is corrupted for any reason, start fresh
+                messages = new ArrayList<>();
             }
-            
         }
         //Adding this message to the list
         messages.add(this);
