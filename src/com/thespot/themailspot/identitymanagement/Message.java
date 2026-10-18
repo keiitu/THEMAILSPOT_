@@ -15,7 +15,6 @@ import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -23,7 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  *
- * @author Keitumetse Chief Mamakoko
+ * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
  * POE Part 02 of 03: Message feature
  */
 public class Message {
@@ -32,7 +31,6 @@ public class Message {
     private static List<Message> sentMessages = new ArrayList<>();
     private static final int MAX_MESSAGE_LENGTH = 250;
    
-    
     //Object-level variables
     private String messageID;
     private String recipient;
@@ -40,9 +38,6 @@ public class Message {
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
     private String status;//To show what action is undertaken after the user choses an action
-    
-    
-  
     
     //Constructor
     public Message (String messageID, String recipient, String messageText, int messageNumber){
