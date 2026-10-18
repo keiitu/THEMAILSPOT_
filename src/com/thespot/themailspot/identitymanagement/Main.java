@@ -224,7 +224,6 @@ public class Main {
                             recipient = userInput.nextLine();
 
                             String status = msg.checkRecipientCell(recipient);
-                            // NOTE: Check the exact wording of your success message!
                             if (status.equals("Cell phone number successfully captured.")) {
                                 isValidRecipient = true; 
                             } else {
