@@ -184,6 +184,7 @@ public class Message {
                 case 3: 
                     status = "stored";
                     storeMessage();
+                    storedMessages.add(this);
                     messageIDs.add(this.messageID);
                     messageHashes.add(this.messageHash);
                     return "Message successfully stored.";
@@ -346,6 +347,7 @@ public class Message {
         }
         StringBuilder sb = new StringBuilder();
         for (Message m : storedMessages) {
+             sb.append("Message ID: ").append(m.getMessageID()).append("\n");
             sb.append("Message Hash: ").append(m.getMessageHash()).append("\n")
               .append("Recipient: ").append(m.getRecipient()).append("\n")
               .append("Message: ").append(m.getMessageText()).append("\n\n");
