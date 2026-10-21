@@ -191,7 +191,8 @@ public class Main {
         while (running){
             System.out.println("\n1) Send Messages");
             System.out.println("2) Show recently sent messages (Coming soon)");
-            System.out.println("3) Quit");
+            System.out.println("3) Stored Messages");
+            System.out.println("4) Quit");
             System.out.print("Choose: ");
             int choice = userInput.nextInt();
             userInput.nextLine();//Consumes the newline
@@ -209,6 +210,7 @@ public class Main {
                     Random rand = new Random();
                     //Generating random ID a message
                     String id = String.format("%010d", rand.nextInt(1_000_000_000));
+                    System.out.println("Your new message ID is: " + id);
                     
                     //Instantiating message object
                     Message msg = new Message(id, "", "", i, username);
@@ -265,7 +267,53 @@ public class Main {
             }else if (choice == 2){
                 System.out.println("Coming soon");
             }else if (choice == 3){
-                running = false;
+                boolean subMenu = true;
+                while (subMenu){
+                    System.out.println("\n--- STORED MESSAGES MENU ---");
+                    System.out.println("a) Display sender and recipient");
+                    System.out.println("b) Display longest message");
+                    System.out.println("c) Search by Message ID");
+                    System.out.println("d) Search by Recipient");
+                    System.out.println("e) Delete by Message Hash");
+                    System.out.println("f) Display full report");
+                    System.out.println("g) Back to Main Menu");
+                    System.out.print("Choose an option: ");
+                    String subChoice = userInput.nextLine().toLowerCase();
+                    
+                    switch (subChoice) {
+                        case "a":
+                            System.out.println(Message.displayStoredSendersAndRecipients());
+                            break;
+                        case "b":
+                            System.out.println(Message.getLongestStoredMessage());
+                            break;
+                        case "c":
+                            System.out.print("Enter ID: ");
+                            System.out.println(Message.searchByMessageID(userInput.nextLine()));
+                            break;
+                        case "d":
+                            System.out.print("Enter Recipient: ");
+                            System.out.println(Message.searchByRecipient(userInput.nextLine()));
+                            break;
+                        case "e":
+                            System.out.print("Enter Hash: ");
+                            System.out.println(Message.deleteByHash(userInput.nextLine()));
+                            break;
+                        case "f":
+                            System.out.println(Message.displayStoredReport());
+                            break;
+                        case "g":
+                            subMenu = false; // Breaks out of the sub-menu loop
+                            break;
+                        default:
+                            System.out.println("Invalid option. Please choose a-g.");
+                    }
+                 }
+              }else if (choice == 4){
+                  running = false;
+                  
+              }else{
+                  System.out.println("Invalid choice.");
             }
             
         }
