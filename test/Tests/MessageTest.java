@@ -17,7 +17,22 @@ import com.thespot.themailspot.identitymanagement.Message;
 //This program will check if all the methods within the message class execute as expected
 public class MessageTest {
     
-    
+    //Before method to ensure that we start on a clean slate
+    @org.junit.Before
+    public void setUp(){
+        Message.storedMessages.clear();
+        // Populate with POE Test Data
+        Message.storedMessages.add(new Message("0000000001", "+27834557896", "Did you get the cake?", 0, "Dev"));
+        Message.storedMessages.add(new Message("0000000002", "+27838884567", "Where are you? You are late! I have asked you to be on time.", 1, "Dev"));
+        Message.storedMessages.add(new Message("0000000003", "+27834484567", "Yohoooo, I am at your gate.", 2, "Dev"));
+        Message.storedMessages.add(new Message("0838884567", "+27838884567", "It is dinner time !", 3, "Dev")); // POE specified
+        Message.storedMessages.add(new Message("0000000005", "+27838884567", "Ok, I am leaving without you.", 4, "Dev"));
+        // Generate hashes for the test data
+        for (Message m : Message.storedMessages) {
+            m.createMessageHash();
+        }
+    }
+    //Tests if print messages works as expected
     @Test
     public void testPrintMessages() {
         // 1. Clear the list to ensure a clean test
@@ -118,4 +133,38 @@ public class MessageTest {
         String actual = msg.createMessageHash();
         assertEquals(expected, actual);
     }
+    
+    @Test
+    public void testDisplayLongestMessage() {
+        // The longest message is Message 2
+        String expected = "Where are you? You are late! I have asked you to be on time.";
+        assertEquals(expected, Message.getLongestStoredMessage());
+    }
+     @Test
+    public void testSearchByMessageID() {
+        // Test Data 4 ID is "0838884567"
+        String expected = "Recipient: +27838884567\nMessage: It is dinner time !";
+        assertEquals(expected, Message.searchByMessageID("0838884567"));
+    }
+    
+    @Test
+    public void testSearchByRecipient() {
+        // Search for +27838884567 (Matches Message 2 and 5)
+        String result = Message.searchByRecipient("+27838884567");
+        assertTrue(result.contains("Where are you?"));
+        assertTrue(result.contains("Ok, I am leaving without you."));
+    }
+
+    @Test
+    public void testDeleteByHash() {
+        // Message 2 has the hash starting with "2:1:WHEREON"
+        String hashToDelete = Message.storedMessages.get(1).getMessageHash(); 
+        
+        String result = Message.deleteByHash(hashToDelete);
+        assertEquals("Message: \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.", result);
+        
+        // Ensure it was actually removed
+        assertEquals(4, Message.storedMessages.size());
+    }
+    
 }
