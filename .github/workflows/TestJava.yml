@@ -2,7 +2,7 @@ name: Java CI with Ant
 
 on:
   push:
-    branches: [ main, 'messagefeat' ]
+    branches: [ main, 'lastpart' ]
   pull_request:
     branches: [ main ]
 
