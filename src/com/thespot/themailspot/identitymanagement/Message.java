@@ -29,8 +29,14 @@ import com.google.gson.reflect.TypeToken;
 public class Message {
     //Class -level variable
     private static int totalMessages = 0;
-    public static List<Message> sentMessages = new ArrayList<>();
     private static final int MAX_MESSAGE_LENGTH = 250;
+    //The 5 required arrays 
+    public static List<Message> sentMessages = new ArrayList<>();
+    public static List<Message> disregardedMessages = new ArrayList<>();
+    public static List<Message> storedMessages = new ArrayList<>();
+    public static List<Message> messageHashes = new ArrayList<>();
+    public static List<Message> messageIDs = new ArrayList<>();
+   
    
     //Object-level variables
     private String messageID;
@@ -39,6 +45,9 @@ public class Message {
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
     private String status;//To show what action is undertaken after the user choses an action
+    //Sender Field
+    private String sender;
+
     
     //Constructor
     public Message (String messageID, String recipient, String messageText, int messageNumber){
