@@ -114,6 +114,12 @@ public class Message {
     //Create messageHash method: The system autogenerates a message hash which contains the first two numbers of the message ID, a colon(:), the number of the message(:), and the first and last words in the message
     //The Hash must be diplayed in all caps
     public String createMessageHash(){
+         String idPrefix;
+            if (messageID != null && messageID.length() >= 2) {
+                idPrefix = messageID.substring(0, 2);
+            } else {
+                idPrefix = messageID; // Fallback if the ID is too short
+            }
         //Getting the first two digits of the MessageID
         String preIDchar = messageID.substring(0,2);
         //Separating message words, and storing into an array
