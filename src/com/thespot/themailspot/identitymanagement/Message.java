@@ -37,8 +37,7 @@ public class Message {
     private String messageText;
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
-    private String status;//To show what action is undertaken after the user choses an action
-    
+    private String status;//To show what action is undertaken after the user choses an action 
     //Constructor
     public Message (String messageID, String recipient, String messageText, int messageNumber){
        this.messageID = messageID;
