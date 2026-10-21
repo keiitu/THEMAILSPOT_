@@ -14,6 +14,8 @@ import java.lang.reflect.Type;
 //Gson imports
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+//iterator import
+import java.util.Iterator;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -268,6 +270,95 @@ public class Message {
     } catch (Exception e) {
         System.out.println("Error loading messages: " + e.getMessage());
     }
+    }
+    //Display sender and recipient of all stored messages method: Shows sender and recipient of stored messages
+     public static String displayStoredSendersAndRecipients() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+         
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+            sb.append("Sender: ").append(m.getSender())
+              .append("::Recipient: ").append(m.getRecipient()).append("\n");
+        }
+        return sb.toString();
+    }
+    //Display the longest stored message method: shows the longest stored message 
+      public static String getLongestStoredMessage() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+            
+        Message longest = storedMessages.get(0);
+        for (Message m : storedMessages) {
+            if (m.getMessageText().length() > longest.getMessageText().length()) {
+                longest = m;
+            }
+        }
+        return longest.getMessageText();
+    }
+    //Search for a messageID and display recipient and message: loops through list searching for corresponding messageID
+    public static String searchByMessageID(String id) {
+        for (Message m : storedMessages) {
+            if (m.getMessageID().equals(id)) {
+                return "Recipient: " + m.getRecipient() + "\nMessage: " + m.getMessageText();
+            }
+        }
+        return "Message ID not found.";
+    }
+    //Search for all messages stored for a particular recipient
+    public static String searchByRecipient(String recipient) {
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+            if (m.getRecipient().equals(recipient)) {
+                sb.append("Message: \"").append(m.getMessageText()).append("\"\n");
+            }
+        }
+        if (sb.length() == 0) {
+            return "No messages found for this recipient.";
+        }
+        return sb.toString();
+    }
+    //Delete a message using the message hash
+    public static String deleteByHash(String hash) {
+        Iterator<Message> iterator = storedMessages.iterator();
+        while (iterator.hasNext()) {
+            Message m = iterator.next();
+            if (m.getMessageHash().equals(hash)) {
+                iterator.remove();
+                saveStoredMessagesToJson(); //Used to update the JSON file (Added helper method)
+                return "Message: \"" + m.getMessageText() + "\" successfully deleted.";
+            }
+        }
+        return "Message hash not found.";
+    }
+    //Display report listing full detauils of all stored messages
+      public static String displayStoredReport() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+            sb.append("Message Hash: ").append(m.getMessageHash()).append("\n")
+              .append("Recipient: ").append(m.getRecipient()).append("\n")
+              .append("Message: ").append(m.getMessageText()).append("\n\n");
+        }
+        return sb.toString();
+    }
+    //Helper method to write the JSON file after a deletion
+      public static void saveStoredMessagesToJson() {
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("messages.json")) {
+            gson.toJson(storedMessages, writer);
+        } catch (IOException e) {
+            System.out.println("Error saving messages: " + e.getMessage());
+        }
+    }
+      
+    
+
+    
 }
     
     
@@ -277,4 +368,4 @@ public class Message {
     
     
     
-}
+
