@@ -34,8 +34,8 @@ public class Message {
     public static List<Message> sentMessages = new ArrayList<>();
     public static List<Message> disregardedMessages = new ArrayList<>();
     public static List<Message> storedMessages = new ArrayList<>();
-    public static List<Message> messageHashes = new ArrayList<>();
-    public static List<Message> messageIDs = new ArrayList<>();
+    public static List<String> messageHashes = new ArrayList<>();
+    public static List<String> messageIDs = new ArrayList<>();
    
    
     //Object-level variables
@@ -50,11 +50,12 @@ public class Message {
 
     
     //Constructor
-    public Message (String messageID, String recipient, String messageText, int messageNumber){
+    public Message (String messageID, String recipient, String messageText, int messageNumber, String sender){
        this.messageID = messageID;
        this.recipient = recipient;
        this.messageText = messageText;
        this.messageNumber = messageNumber;
+       this.sender = sender;
     }
   
     //Getters
@@ -75,6 +76,9 @@ public class Message {
     }
     public int getMessageNumber(){
         return messageNumber;
+    }
+    public String getSender(){
+        return sender;
     }
     
     
@@ -159,19 +163,21 @@ public class Message {
                 case 1:
                     status = "sent";
                     sentMessages.add(this);
+                    messageIDs.add(this.messageID);
+                    messageHashes.add(this.messageHash);
                     return "Message successfully sent.";
                     
 
                 case 2:
                     status = "discarded";
-                    System.out.println("Press 0 to delete the message.");
-                    int deleteChoice = userChoice.nextInt();
-                    // The message is discarded simply by NOT being saved to the list.
+                    disregardedMessages.add(this);
                     return "Press 0 to delete the message.";//Adhering to the POE requirements (UX tradeoff)
                     
                 case 3: 
                     status = "stored";
                     storeMessage();
+                    messageIDs.add(this.messageID);
+                    messageHashes.add(this.messageHash);
                     return "Message successfully stored.";
 
                 default:
@@ -244,6 +250,25 @@ public class Message {
         }
         
     }
+    //Load Stored Messaged Method: To populate the storedMessages array when the program starts
+    public static void loadStoredMessagesFromJson() {
+    storedMessages.clear();
+    File file = new File("messages.json");
+    if (!file.exists() || file.length() == 0) {
+        return;
+    }
+    
+    Gson gson = new Gson();
+    try (FileReader reader = new FileReader(file)) {
+        Type listType = new TypeToken<List<Message>>(){}.getType();
+        List<Message> loaded = gson.fromJson(reader, listType);
+        if (loaded != null) {
+            storedMessages.addAll(loaded);
+        }
+    } catch (Exception e) {
+        System.out.println("Error loading messages: " + e.getMessage());
+    }
+}
     
     
     
