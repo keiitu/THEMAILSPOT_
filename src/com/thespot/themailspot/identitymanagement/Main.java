@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
@@ -147,6 +148,8 @@ public class Main {
         
         //Login Message
         System.out.println("LOGIN");
+        //Calling loadStoredMessagesFromJSON method
+        Message.loadStoredMessagesFromJson();
        
         
         //Variables to hold user input values for logging into the system
@@ -208,7 +211,7 @@ public class Main {
                     String id = String.format("%010d", rand.nextInt(1_000_000_000));
                     
                     //Instantiating message object
-                    Message msg = new Message(id, "", "", i);
+                    Message msg = new Message(id, "", "", i, username);
                     
                     //Validating messageID
                      if (!msg.checkMessageID(id)) {
@@ -245,7 +248,7 @@ public class Main {
                             }
                         }
                     //Instantiating the message class object
-                    msg = new Message (id, recipient, messageText, i);
+                    msg = new Message (id, recipient, messageText, i, username);
                                     
                     //Generating the message hash when all validation passes
                     msg.createMessageHash();
@@ -256,7 +259,7 @@ public class Main {
                            
                 }
                // Printing report for the recentclysent messages
-                Message printer = new Message("", "", "", 0); // Dummy object to access the static list
+                Message printer = new Message("", "", "", 0, ""); // Dummy object to access the static list
                 System.out.println("\n--- RECENTLY SENT MESSAGES ---");
                 System.out.println(printer.printMessages());
             }else if (choice == 2){
