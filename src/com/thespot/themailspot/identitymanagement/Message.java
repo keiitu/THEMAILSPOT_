@@ -153,7 +153,10 @@ public class Message {
         //Scanner intentionally not closed to avoid closing System.in, which would break the Scanner used in Main
         //Displaying per-message menu:
         System.out.println("Select what you want to do with the message: ");
-        while (true){             
+        while (true){
+            //Variables for input error handling
+            int chosenOption = -1;
+            boolean validInputcheck = false;
             System.out.println("""
                                1) Send Message
 
@@ -162,10 +165,20 @@ public class Message {
                                3) Store Message
 
                                """);
+            //While loop to handle input mismatch
             System.out.println("Choose: ");
-            int chosenOption = userChoice.nextInt();
-            userChoice.nextLine();
+            //If statement to relay conditions for when the user has entered an invalid choice
+            if(userChoice.hasNextInt()){
+               chosenOption = userChoice.nextInt();
+               userChoice.nextLine();//Consumes newline
+               validInputcheck = true;
 
+                
+            }else{
+                System.out.println("Invalid Input. Please enter a number.");
+                userChoice.nextLine();//Clears the bad input from the scanner
+            }
+            
             //Switch statement for the menu:
             switch (chosenOption){
                 case 1:
