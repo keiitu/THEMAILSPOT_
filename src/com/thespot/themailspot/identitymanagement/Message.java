@@ -211,9 +211,11 @@ public class Message {
         }
         //Looping through the list and appending the strings
         for (Message msg : sentMessages){
+            sb.append("Message ID: ").append(msg.getMessageID()).append("\n");
+            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
             sb.append("Recipient: ");sb.append(msg.getRecipient()).append("\n");
             sb.append("Message: ");sb.append(msg.getMessageText()).append("\n");
-            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
+           
         }
         return sb.toString();
     }
