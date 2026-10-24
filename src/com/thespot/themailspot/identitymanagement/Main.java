@@ -184,7 +184,8 @@ public class Main {
         //Welcoming user to the program
         System.out.println("WELCOME PAGE");
         System.out.println("Welcome to QuickChat");
-         //Creating the Message Object
+        //Declaring session message counter to so that the while (running) loop doesn't reset when you go back to the menu
+        int sessionMessageCounter = 0;
         
         //Main menu loop
         boolean running = true;
@@ -214,6 +215,7 @@ public class Main {
                     
                     //Instantiating message object
                     Message msg = new Message(id, "", "", i, username);
+             
                     
                     //Validating messageID
                      if (!msg.checkMessageID(id)) {
@@ -250,7 +252,9 @@ public class Main {
                             }
                         }
                     //Instantiating the message class object
-                    msg = new Message (id, recipient, messageText, i, username);
+                    msg = new Message (id, recipient, messageText, sessionMessageCounter, username);
+                    //Incrementing the sessioMessageCounter so that the next message gets a new number
+                    sessionMessageCounter++;
                                     
                     //Generating the message hash when all validation passes
                     msg.createMessageHash();
@@ -260,6 +264,9 @@ public class Main {
                     System.out.println(menu);
                            
                 }
+                Message counterObj = new Message("", "", "", 0, "");
+                System.out.println("\nTotal messages sent this session: " + counterObj.returnTotalMessages());
+                
                // Printing report for the recentclysent messages
                 Message printer = new Message("", "", "", 0, ""); // Dummy object to access the static list
                 System.out.println("\n--- RECENTLY SENT MESSAGES ---");
