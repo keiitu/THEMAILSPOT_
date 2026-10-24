@@ -190,20 +190,53 @@ public class Main {
         //Main menu loop
         boolean running = true;
         while (running){
+            //Variables for input error handling
+            int choice = -1;
+            boolean validInput = false;
             System.out.println("\n1) Send Messages");
             System.out.println("2) Show recently sent messages (Coming soon)");
             System.out.println("3) Stored Messages");
             System.out.println("4) Quit");
+          //While loop to handle input mismatch  
+          while(!validInput){
             System.out.print("Choose: ");
-            int choice = userInput.nextInt();
-            userInput.nextLine();//Consumes the newline
+            //If statement to relay conditions for when the user has entered an invalid selection
+            if(userInput.hasNextInt()){
+                choice = userInput.nextInt();
+                userInput.nextLine();//Consumes newline
+                validInput = true;
+            }else{
+                System.out.println("Invalid input. Please enter a number.");
+                userInput.nextLine();//Clears the bad input from the scanner
+            }
             
-            //If statement to relay what happens when any choice is selcted
+              
+          }
+            
+            
+            //If statement to relay what happens when any choice is selected
             if (choice == 1){
+                int numMessages = -1;
+                boolean validNum = false;
+              while(!validNum){
                 //Asking user how many messages they want to send
                 System.out.print("How many messages do you want to send? ");
-                int numMessages = userInput.nextInt();
-                userInput.nextLine();//Consume newline
+                if (userInput.hasNextInt()){
+                    numMessages = userInput.nextInt();
+                    userInput.nextLine();//Consume newline
+                    if (numMessages> 0){
+                        validNum = true;
+                    }else{
+                        System.out.println("Please enter a number greater than 0.");
+                    }
+                }else{
+                    System.out.println("Invalid input. Please enter a number.");
+                    userInput.nextLine(); 
+                }
+                
+                  
+              }
+                
                 
                 //Looping for the many numbers the user wants to send messages
                 for(int i = 0; i < numMessages; i++){
