@@ -192,7 +192,7 @@ public class Message {
                 case 2:
                     status = "discarded";
                     disregardedMessages.add(this);
-                    return "Press 0 to delete the message.";//Adhering to the POE requirements (UX tradeoff)
+                    return "Message successfully deleted.";
                     
                 case 3: 
                     status = "stored";
