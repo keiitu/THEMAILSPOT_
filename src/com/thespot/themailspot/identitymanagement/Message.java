@@ -158,7 +158,7 @@ public class Message {
                     System.out.println("Press 0 to delete the message.");
                     int deleteChoice = userChoice.nextInt();
                     // The message is discarded simply by NOT being saved to the list.
-                    return "Press 0 to delete the message.";//Adhering to the POE requirements (UX tradeoff)
+                    return "Message successfully deleted.";//Adhering to the POE requirements (UX tradeoff)
                     
                 case 3: 
                     status = "stored";
