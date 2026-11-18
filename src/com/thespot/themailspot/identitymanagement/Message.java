@@ -25,7 +25,7 @@ import java.util.Iterator;
 /**
  *
  * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
- * POE Part 02 of 03: Message feature
+ * POE Part 03 of 03: Stored Messages
  */
 //This program will handle the core logic related to messaging: Including validation, hash generation, formatting, and the JSON file storage
 public class Message {
