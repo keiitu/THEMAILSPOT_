@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
@@ -13,7 +14,7 @@ import java.util.Random;
  *
  * @author Keitumetse Chief Mamakoko
  * 
- * POE: Part 02 of 03 (Registration and Login Features)
+ * POE: Part 03 of 03 (Registration and Login Features)
  * 
  * This program will allow the user to create an account by entering their first name, last name, username, password, and South African cellphone number:
  * 
@@ -147,6 +148,8 @@ public class Main {
         
         //Login Message
         System.out.println("LOGIN");
+        //Calling loadStoredMessagesFromJSON method
+        Message.loadStoredMessagesFromJson();
        
         
         //Variables to hold user input values for logging into the system
@@ -181,24 +184,59 @@ public class Main {
         //Welcoming user to the program
         System.out.println("WELCOME PAGE");
         System.out.println("Welcome to QuickChat");
-         //Creating the Message Object
+        //Declaring session message counter to so that the while (running) loop doesn't reset when you go back to the menu
+        int sessionMessageCounter = 0;
         
         //Main menu loop
         boolean running = true;
         while (running){
+            //Variables for input error handling
+            int choice = -1;
+            boolean validInput = false;
             System.out.println("\n1) Send Messages");
             System.out.println("2) Show recently sent messages (Coming soon)");
-            System.out.println("3) Quit");
+            System.out.println("3) Stored Messages");
+            System.out.println("4) Quit");
+          //While loop to handle input mismatch  
+          while(!validInput){
             System.out.print("Choose: ");
-            int choice = userInput.nextInt();
-            userInput.nextLine();//Consumes the newline
+            //If statement to relay conditions for when the user has entered an invalid selection
+            if(userInput.hasNextInt()){
+                choice = userInput.nextInt();
+                userInput.nextLine();//Consumes newline
+                validInput = true;
+            }else{
+                System.out.println("Invalid input. Please enter a number.");
+                userInput.nextLine();//Clears the bad input from the scanner
+            }
             
-            //If statement to relay what happens when any choice is selcted
+              
+          }
+            
+            
+            //If statement to relay what happens when any choice is selected
             if (choice == 1){
+                int numMessages = -1;
+                boolean validNum = false;
+              while(!validNum){
                 //Asking user how many messages they want to send
                 System.out.print("How many messages do you want to send? ");
-                int numMessages = userInput.nextInt();
-                userInput.nextLine();//Consume newline
+                if (userInput.hasNextInt()){
+                    numMessages = userInput.nextInt();
+                    userInput.nextLine();//Consume newline
+                    if (numMessages> 0){
+                        validNum = true;
+                    }else{
+                        System.out.println("Please enter a number greater than 0.");
+                    }
+                }else{
+                    System.out.println("Invalid input. Please enter a number.");
+                    userInput.nextLine(); 
+                }
+                
+                  
+              }
+                
                 
                 //Looping for the many numbers the user wants to send messages
                 for(int i = 0; i < numMessages; i++){
@@ -206,9 +244,11 @@ public class Main {
                     Random rand = new Random();
                     //Generating random ID a message
                     String id = String.format("%010d", rand.nextInt(1_000_000_000));
+                    System.out.println("Your new message ID is: " + id);
                     
                     //Instantiating message object
-                    Message msg = new Message(id, "", "", i);
+                    Message msg = new Message(id, "", "", i, username);
+             
                     
                     //Validating messageID
                      if (!msg.checkMessageID(id)) {
@@ -245,7 +285,9 @@ public class Main {
                             }
                         }
                     //Instantiating the message class object
-                    msg = new Message (id, recipient, messageText, i);
+                    msg = new Message (id, recipient, messageText, sessionMessageCounter, username);
+                    //Incrementing the sessioMessageCounter so that the next message gets a new number
+                    sessionMessageCounter++;
                                     
                     //Generating the message hash when all validation passes
                     msg.createMessageHash();
@@ -255,14 +297,63 @@ public class Main {
                     System.out.println(menu);
                            
                 }
+                Message counterObj = new Message("", "", "", 0, "");
+                System.out.println("\nTotal messages sent this session: " + counterObj.returnTotalMessages());
+                
                // Printing report for the recentclysent messages
-                Message printer = new Message("", "", "", 0); // Dummy object to access the static list
+                Message printer = new Message("", "", "", 0, ""); // Dummy object to access the static list
                 System.out.println("\n--- RECENTLY SENT MESSAGES ---");
                 System.out.println(printer.printMessages());
             }else if (choice == 2){
                 System.out.println("Coming soon");
             }else if (choice == 3){
-                running = false;
+                boolean subMenu = true;
+                while (subMenu){
+                    System.out.println("\n--- STORED MESSAGES MENU ---");
+                    System.out.println("a) Display sender and recipient");
+                    System.out.println("b) Display longest message");
+                    System.out.println("c) Search by Message ID");
+                    System.out.println("d) Search by Recipient");
+                    System.out.println("e) Delete by Message Hash");
+                    System.out.println("f) Display full report");
+                    System.out.println("g) Back to Main Menu");
+                    System.out.print("Choose an option: ");
+                    String subChoice = userInput.nextLine().toLowerCase();
+                    
+                    switch (subChoice) {
+                        case "a":
+                            System.out.println(Message.displayStoredSendersAndRecipients());
+                            break;
+                        case "b":
+                            System.out.println(Message.getLongestStoredMessage());
+                            break;
+                        case "c":
+                            System.out.print("Enter ID: ");
+                            System.out.println(Message.searchByMessageID(userInput.nextLine()));
+                            break;
+                        case "d":
+                            System.out.print("Enter Recipient: ");
+                            System.out.println(Message.searchByRecipient(userInput.nextLine()));
+                            break;
+                        case "e":
+                            System.out.print("Enter Hash: ");
+                            System.out.println(Message.deleteByHash(userInput.nextLine()));
+                            break;
+                        case "f":
+                            System.out.println(Message.displayStoredReport());
+                            break;
+                        case "g":
+                            subMenu = false; // Breaks out of the sub-menu loop
+                            break;
+                        default:
+                            System.out.println("Invalid option. Please choose a-g.");
+                    }
+                 }
+              }else if (choice == 4){
+                  running = false;
+                  
+              }else{
+                  System.out.println("Invalid choice.");
             }
             
         }

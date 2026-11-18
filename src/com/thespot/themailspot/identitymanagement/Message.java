@@ -14,6 +14,8 @@ import java.lang.reflect.Type;
 //Gson imports
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+//iterator import
+import java.util.Iterator;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -29,8 +31,14 @@ import com.google.gson.reflect.TypeToken;
 public class Message {
     //Class -level variable
     private static int totalMessages = 0;
-    public static List<Message> sentMessages = new ArrayList<>();
     private static final int MAX_MESSAGE_LENGTH = 250;
+    //The 5 required arrays 
+    public static List<Message> sentMessages = new ArrayList<>();
+    public static List<Message> disregardedMessages = new ArrayList<>();
+    public static List<Message> storedMessages = new ArrayList<>();
+    public static List<String> messageHashes = new ArrayList<>();
+    public static List<String> messageIDs = new ArrayList<>();
+   
    
     //Object-level variables
     private String messageID;
@@ -39,13 +47,17 @@ public class Message {
     private String messageHash;
     private int messageNumber;//To show which message is chosen by the user
     private String status;//To show what action is undertaken after the user choses an action
+    //Sender Field
+    private String sender;
+
     
     //Constructor
-    public Message (String messageID, String recipient, String messageText, int messageNumber){
+    public Message (String messageID, String recipient, String messageText, int messageNumber, String sender){
        this.messageID = messageID;
        this.recipient = recipient;
        this.messageText = messageText;
        this.messageNumber = messageNumber;
+       this.sender = sender;
     }
   
     //Getters
@@ -66,6 +78,9 @@ public class Message {
     }
     public int getMessageNumber(){
         return messageNumber;
+    }
+    public String getSender(){
+        return sender;
     }
     
     
@@ -99,6 +114,12 @@ public class Message {
     //Create messageHash method: The system autogenerates a message hash which contains the first two numbers of the message ID, a colon(:), the number of the message(:), and the first and last words in the message
     //The Hash must be diplayed in all caps
     public String createMessageHash(){
+         String idPrefix;
+            if (messageID != null && messageID.length() >= 2) {
+                idPrefix = messageID.substring(0, 2);
+            } else {
+                idPrefix = messageID; // Fallback if the ID is too short
+            }
         //Getting the first two digits of the MessageID
         String preIDchar = messageID.substring(0,2);
         //Separating message words, and storing into an array
@@ -132,7 +153,10 @@ public class Message {
         //Scanner intentionally not closed to avoid closing System.in, which would break the Scanner used in Main
         //Displaying per-message menu:
         System.out.println("Select what you want to do with the message: ");
-        while (true){             
+        while (true){
+            //Variables for input error handling
+            int chosenOption = -1;
+            boolean validInputcheck = false;
             System.out.println("""
                                1) Send Message
 
@@ -141,15 +165,27 @@ public class Message {
                                3) Store Message
 
                                """);
+            //While loop to handle input mismatch
             System.out.println("Choose: ");
-            int chosenOption = userChoice.nextInt();
-            userChoice.nextLine();
+            //If statement to relay conditions for when the user has entered an invalid choice
+            if(userChoice.hasNextInt()){
+               chosenOption = userChoice.nextInt();
+               userChoice.nextLine();//Consumes newline
+               validInputcheck = true;
 
+                
+            }else{
+                System.out.println("Invalid Input. Please enter a number.");
+                userChoice.nextLine();//Clears the bad input from the scanner
+            }
+            
             //Switch statement for the menu:
             switch (chosenOption){
                 case 1:
                     status = "sent";
                     sentMessages.add(this);
+                    messageIDs.add(this.messageID);
+                    messageHashes.add(this.messageHash);
                     return "Message successfully sent.";
                     
 
@@ -163,6 +199,9 @@ public class Message {
                 case 3: 
                     status = "stored";
                     storeMessage();
+                    storedMessages.add(this);
+                    messageIDs.add(this.messageID);
+                    messageHashes.add(this.messageHash);
                     return "Message successfully stored.";
 
                 default:
@@ -187,9 +226,11 @@ public class Message {
         }
         //Looping through the list and appending the strings
         for (Message msg : sentMessages){
+            sb.append("Message ID: ").append(msg.getMessageID()).append("\n");
+            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
             sb.append("Recipient: ");sb.append(msg.getRecipient()).append("\n");
             sb.append("Message: ");sb.append(msg.getMessageText()).append("\n");
-            sb.append("Message Hash: ");sb.append(msg.getMessageHash()).append("\n");
+           
         }
         return sb.toString();
     }
@@ -235,6 +276,115 @@ public class Message {
         }
         
     }
+    //Load Stored Messaged Method: To populate the storedMessages array when the program starts
+    public static void loadStoredMessagesFromJson() {
+    storedMessages.clear();
+    File file = new File("messages.json");
+    if (!file.exists() || file.length() == 0) {
+        return;
+    }
+    
+    Gson gson = new Gson();
+    try (FileReader reader = new FileReader(file)) {
+        Type listType = new TypeToken<List<Message>>(){}.getType();
+        List<Message> loaded = gson.fromJson(reader, listType);
+        if (loaded != null) {
+            storedMessages.addAll(loaded);
+        }
+    } catch (Exception e) {
+        System.out.println("Error loading messages: " + e.getMessage());
+    }
+    }
+    //Display sender and recipient of all stored messages method: Shows sender and recipient of stored messages
+     public static String displayStoredSendersAndRecipients() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+         
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+            sb.append("Sender: ").append(m.getSender())
+              .append("::Recipient: ").append(m.getRecipient()).append("\n");
+        }
+        return sb.toString();
+    }
+    //Display the longest stored message method: shows the longest stored message 
+      public static String getLongestStoredMessage() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+            
+        Message longest = storedMessages.get(0);
+        for (Message m : storedMessages) {
+            if (m.getMessageText().length() > longest.getMessageText().length()) {
+                longest = m;
+            }
+        }
+        return longest.getMessageText();
+    }
+    //Search for a messageID and display recipient and message: loops through list searching for corresponding messageID
+    public static String searchByMessageID(String id) {
+        for (Message m : storedMessages) {
+            if (m.getMessageID().equals(id)) {
+                return "Recipient: " + m.getRecipient() + "\nMessage: " + m.getMessageText();
+            }
+        }
+        return "Message ID not found.";
+    }
+    //Search for all messages stored for a particular recipient
+    public static String searchByRecipient(String recipient) {
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+            if (m.getRecipient().equals(recipient)) {
+                sb.append("Message: \"").append(m.getMessageText()).append("\"\n");
+            }
+        }
+        if (sb.length() == 0) {
+            return "No messages found for this recipient.";
+        }
+        return sb.toString();
+    }
+    //Delete a message using the message hash
+    public static String deleteByHash(String hash) {
+        Iterator<Message> iterator = storedMessages.iterator();
+        while (iterator.hasNext()) {
+            Message m = iterator.next();
+            if (m.getMessageHash().equals(hash)) {
+                iterator.remove();
+                saveStoredMessagesToJson(); //Used to update the JSON file (Added helper method)
+                return "Message: \"" + m.getMessageText() + "\" successfully deleted.";
+            }
+        }
+        return "Message hash not found.";
+    }
+    //Display report listing full detauils of all stored messages
+      public static String displayStoredReport() {
+        if (storedMessages.isEmpty()){
+            return "No stored messages.";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Message m : storedMessages) {
+             sb.append("Message ID: ").append(m.getMessageID()).append("\n");
+            sb.append("Message Hash: ").append(m.getMessageHash()).append("\n")
+              .append("Recipient: ").append(m.getRecipient()).append("\n")
+              .append("Message: ").append(m.getMessageText()).append("\n\n");
+        }
+        return sb.toString();
+    }
+    //Helper method to write the JSON file after a deletion
+      public static void saveStoredMessagesToJson() {
+        Gson gson = new Gson();
+        try (FileWriter writer = new FileWriter("messages.json")) {
+            gson.toJson(storedMessages, writer);
+        } catch (IOException e) {
+            System.out.println("Error saving messages: " + e.getMessage());
+        }
+    }
+      
+    
+
+    
+}
     
     
     
@@ -243,4 +393,4 @@ public class Message {
     
     
     
-}
+
