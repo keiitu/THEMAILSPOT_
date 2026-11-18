@@ -11,13 +11,13 @@ import com.thespot.themailspot.identitymanagement.Message;
  *
  * @author Keitumetse Chief Mamakoko: Student @Rosebank International - ST10496139
  * 
- * POE Part 02 of 03: Message feature: 
+ * POE Part 03 of 03: Message feature: 
 
  */
 //This program will check if all the methods within the message class execute as expected
 public class MessageTest {
     
-    //Before method to ensure that we start on a clean slate
+    //Before method to ensure that we start on a clean slate: The data is extracted from the POE
     @org.junit.Before
     public void setUp(){
         Message.storedMessages.clear();
@@ -27,7 +27,7 @@ public class MessageTest {
         Message.storedMessages.add(new Message("0000000003", "+27834484567", "Yohoooo, I am at your gate.", 2, "Dev"));
         Message.storedMessages.add(new Message("0838884567", "+27838884567", "It is dinner time !", 3, "Dev")); // POE specified
         Message.storedMessages.add(new Message("0000000005", "+27838884567", "Ok, I am leaving without you.", 4, "Dev"));
-        // Generate hashes for the test data
+        // Generating hashes for the test data
         for (Message m : Message.storedMessages) {
             m.createMessageHash();
         }
@@ -35,22 +35,22 @@ public class MessageTest {
     //Tests if print messages works as expected
     @Test
     public void testPrintMessages() {
-        // 1. Clear the list to ensure a clean test
+        //Clear the list to ensure a clean test
         Message.sentMessages.clear();
-        // 2. Create a message
+        //Create a message
         Message msg = new Message("0012345678", "+27718693002", "Hi Mike", 0, "Tester");
         msg.createMessageHash(); // Generate the hash for the printout
 
-        // 3. Manually add it to the static list (simulating a send)
+        //Manually add it to the static list (simulating a send)
         Message.sentMessages.add(msg);
-        // 4. Call printMessages
+        //Call printMessages
         String result = msg.printMessages();
-        // 5. Assert that the output contains the correct details
+        //Assert that the output contains the correct details
         assertTrue("Output should contain Recipient", result.contains("+27718693002"));
         assertTrue("Output should contain Message", result.contains("Hi Mike"));
         assertTrue("Output should contain Hash", result.contains("00:0:HIMIKE"));
 
-        // 6. Clean up
+        // Clean up
         Message.sentMessages.clear();
     }
 
