@@ -191,8 +191,10 @@ public class Message {
 
                 case 2:
                     status = "discarded";
-                    disregardedMessages.add(this);
-                    return "Message successfully deleted.";
+                    System.out.println("Press 0 to delete the message.");
+                    int deleteChoice = userChoice.nextInt();
+                    // The message is discarded simply by NOT being saved to the list.
+                    return "Message successfully deleted.";//Adhering to the POE requirements (UX tradeoff)
                     
                 case 3: 
                     status = "stored";
